@@ -1,5 +1,5 @@
 import React from 'react';
-import {Todo} from './Todo'
+import {TodoApp2} from './TodoApp2'
 
 export class TodoList extends React.Component {
 
@@ -12,7 +12,7 @@ export class TodoList extends React.Component {
 
         const items = this.props.items;
         const listItems = items.map((list,i) =>
-        <li id={i}><Todo
+        <li id={i}><TodoApp2
           res={list}
           />
         </li>
