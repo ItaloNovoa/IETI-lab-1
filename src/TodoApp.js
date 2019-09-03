@@ -8,6 +8,8 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Input from '@material-ui/core/Input';
 import TextField from '@material-ui/core/TextField';
+import  DatePicker  from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
 
 
 class TodoApp extends React.Component {
@@ -17,12 +19,13 @@ class TodoApp extends React.Component {
     super(props);
     this.state = { items: [], text: '', priority: '', dueDate: '' };
     this.handleChange = this.handleChange.bind(this);
+    this.handleDate  = this.handleDate.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
   }
 
   render() {
-
+    
 
     return (
       <Card >
@@ -33,8 +36,8 @@ class TodoApp extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="new-todo">
             What needs to be done?
-            </label>
-          
+          </label>
+
           <TextField
             type="text"
             label="text"
@@ -46,18 +49,21 @@ class TodoApp extends React.Component {
           <TextField
             type="number"
             id="number"
-            label="Number"            
+            label="Number"
             onChange={this.handleChange}
             value={this.state.priority}
             margin="normal"
-          />           
-          <input
+          />
+          
+          <DatePicker
             type="date"
             id="date"
-            onChange={this.handleChange}
-            value={this.state.dueDate}
-          />
-          <Button size="small">Add{this.state.items.length + 1}</Button>
+            selected={this.state.dueDate}
+            onChange={this.handleDate}/> 
+
+          <Button variant="contained" type="submit">
+            Add #{this.state.items.length + 1}
+          </Button>
         </form>
       </Card >
     );
@@ -66,7 +72,10 @@ class TodoApp extends React.Component {
   handleChange(e) {
     this.setState({ text: document.getElementById('text').value })
     this.setState({ priority: document.getElementById('number').value });;
-    this.setState({ dueDate: document.getElementById('date').value });;
+  }
+
+  handleDate(e){
+    this.setState({dueDate: e});
   }
 
 

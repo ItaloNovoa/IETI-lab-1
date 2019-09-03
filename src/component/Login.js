@@ -12,8 +12,10 @@ import './Login.css'
 
 
 export class Login extends React.Component{
-
-    render(){
+   
+    
+    render(){        
+        
         return (
             <React.Fragment>
                 <CssBaseline />
@@ -25,7 +27,7 @@ export class Login extends React.Component{
                         <Typography variant="headline">Sign in</Typography>
                         <form className="form">
                             <FormControl margin="normal" required fullWidth>
-                                <InputLabel htmlFor="email">Email Address</InputLabel>
+                                <InputLabel htmlFor="email">UserName</InputLabel>
                                 <Input id="email" name="email" autoComplete="email" autoFocus />
                             </FormControl>
                             <FormControl margin="normal" required fullWidth>
@@ -43,6 +45,7 @@ export class Login extends React.Component{
                                 variant="raised"
                                 color="primary"
                                 className="submit"
+                                onClick={this.check}
                             >
                                 Sign in
                             </Button>
@@ -51,6 +54,18 @@ export class Login extends React.Component{
                 </main>
             </React.Fragment>
         );
+    }
+
+    check(){
+        const email=document.getElementById("email").value;
+        const password=document.getElementById("password").value
+        
+        if( email!="" &&  password!=""){
+            localStorage.setItem("isLoggedin",true);
+            localStorage.setItem("mailLogged",email);
+            localStorage.setItem("passwordLogged",password);
+        }
+        
     }
 
 }
