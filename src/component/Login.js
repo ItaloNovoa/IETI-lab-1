@@ -9,6 +9,7 @@ import LockIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import './Login.css'
+import App from '../App';
 
 
 export class Login extends React.Component{
@@ -65,6 +66,7 @@ export class Login extends React.Component{
             localStorage.setItem("mailLogged",email);
             localStorage.setItem("passwordLogged",password);
         }
+        App();
         
     }
 

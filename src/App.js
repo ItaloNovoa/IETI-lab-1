@@ -14,58 +14,39 @@ import {
 
 
 function App() {
-
-  const isLoggedIn=false;
-  const todos = [{ text: "Learn React", priority: 5, dueDate: new Date() },
-  { text: "Learn about APIs", priority: 4, dueDate: new Date(2018, 8, 30) },
-  { text: "write TODO App", priority: 3, dueDate: new Date(2018, 9, 30) }];
+  const isLoggedIn = localStorage.getItem("isLoggedin");
 
   const LoginView = () => (
     <Login />
   );
 
-  const TodoView = () => (
-    <TodoApp/>
-  );
-  const fakeAuth = {
-    isAuthenticated: false,
-    authenticate(cb) {
-      this.isAuthenticated = true;
-      setTimeout(cb, 100); // fake async
-    },
-    signout(cb) {
-      this.isAuthenticated = false;
-      setTimeout(cb, 100);
-    }
-  };
-  return (
+  const Todo = () => (
     <div>
-      <Router>
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h1 className="App-title">TODO React App</h1>
-          </header>
+      <TodoApp />
 
-          <br />
-          <br />
-
-          <ul>
-            <li><Link to="/">Login</Link></li>
-            <li><Link to="/todo">Todo</Link></li>
-          </ul>
-
-          <div>
-            <Route exact path="/" component={LoginView} />
-            <Route path="/todo" component={TodoView} />
-          </div>
-        </div>
-      </Router>
-      {/**
-      <TodoList items={todos}/>
-       */}
-    </div>
-  );  
+    </div>);
+  if (!isLoggedIn) {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h1 className="App-title">TODO React App</h1>
+        </header>
+        <LoginView></LoginView>
+      </div>
+    );
+  }
+  else {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h1 className="App-title">TODO React App</h1>
+        </header>
+        <Todo/>
+      </div>
+    );
+  }
 }
 
 export default App;
